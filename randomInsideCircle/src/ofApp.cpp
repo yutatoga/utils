@@ -84,6 +84,14 @@ void ofApp::draw(){
     ofPopMatrix();
 }
 
+ofVec2f ofApp::averageRandomCircle(ofVec2f center, float radius){
+    // average random position inside a circle
+    float theta = ofRandom(0, TWO_PI);
+    float randomRadius = sqrt(ofRandom(0, 1))*radius;
+    ofVec2f position(center.x+randomRadius*cos(theta), center.y+randomRadius*sin(theta));
+    return position;
+}
+
 void ofApp::drawAverageRandomCircle(ofVec2f center, float referenceCircleRadius, int randomPointNumber, bool enableSeedRandom){
     // reference circle
     ofNoFill();
@@ -95,11 +103,17 @@ void ofApp::drawAverageRandomCircle(ofVec2f center, float referenceCircleRadius,
     }
     ofFill();
     for (int i = 0; i < randomPointNumber; i++) {
-        float theta = ofRandom(0, TWO_PI);
-        float randomCircleRadius = sqrt(ofRandom(0, 1))*referenceCircleRadius;
-        ofDrawCircle(center.x+randomCircleRadius*cos(theta), center.y+randomCircleRadius*sin(theta), 1);
+        ofDrawCircle(averageRandomCircle(center, referenceCircleRadius), 1);
     }
     ofSeedRandom();
+}
+
+ofVec2f ofApp::randomCircle(ofVec2f center, float radius){
+    // random position inside a circle
+    float theta = ofRandom(0, TWO_PI);
+    float randomRadius = ofRandom(0, radius);
+    ofVec2f position(center.x+randomRadius*cos(theta), center.y+randomRadius*sin(theta));
+    return position;
 }
 
 void ofApp::drawRandomCircle(ofVec2f center, float referenceCircleRadius, int randomPointNumber, bool enableSeedRandom){
@@ -113,11 +127,21 @@ void ofApp::drawRandomCircle(ofVec2f center, float referenceCircleRadius, int ra
     }
     ofFill();
     for (int i = 0; i < randomPointNumber; i++) {
-        float theta = ofRandom(0, TWO_PI);
-        float randomCircleRadius = ofRandom(0, referenceCircleRadius);
-        ofDrawCircle(center.x+randomCircleRadius*cos(theta), center.y+randomCircleRadius*sin(theta), 1);
+        ofDrawCircle(randomCircle(center, referenceCircleRadius), 1);
     }
     ofSeedRandom();
+}
+
+ofVec3f ofApp::randomSphereSurface(float radius, ofVec3f center){
+    float theta = acos(1-2*ofRandom(0, 1));
+    float r = radius*sin(theta);
+    float n = ofRandom(0, 1)*TWO_PI;
+    float x = radius*cos(theta);
+    float y = r*sin(n);
+    float z = r*cos(n);
+    ofVec3f position(x, y, z);
+    position += center;
+    return position;
 }
 
 void ofApp::drawRandomSphereSurface(float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom){
@@ -125,15 +149,22 @@ void ofApp::drawRandomSphereSurface(float referenceSphereRadius, int randomPoint
         ofSeedRandom(1);
     }
     for (int i = 0; i < randomPointNumber; i++) {
-        float theta = acos(1-2*ofRandom(0, 1));
-        float r = referenceSphereRadius*sin(theta);
-        float n = ofRandom(0, 1)*TWO_PI;
-        float x = referenceSphereRadius*cos(theta);
-        float y = r*sin(n);
-        float z = r*cos(n);
-        ofDrawSphere(x, y ,z, 1);
+        ofDrawSphere(randomSphereSurface(referenceSphereRadius), 1);
     }
     ofSeedRandom();
+}
+
+ofVec3f ofApp::randomSphere(float radius, ofVec3f center){
+    float theta = acos(1-2*ofRandom(0, 1));
+    float r0 = sqrt(ofRandom(0, 1)) * radius;
+    float r = r0*sin(theta);
+    float n = ofRandom(0, 1)*TWO_PI;
+    float x = r0*cos(theta);
+    float y = r*sin(n);
+    float z = r*cos(n);
+    ofVec3f position(x, y, z);
+    position += center;
+    return position;
 }
 
 void ofApp::drawRandomSphere(float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom){
@@ -141,18 +172,10 @@ void ofApp::drawRandomSphere(float referenceSphereRadius, int randomPointNumber,
         ofSeedRandom(1);
     }
     for (int i = 0; i < randomPointNumber; i++) {
-        float theta = acos(1-2*ofRandom(0, 1));
-        float r0 = sqrt(ofRandom(0, 1)) * referenceSphereRadius;
-        float r = r0*sin(theta);
-        float n = ofRandom(0, 1)*TWO_PI;
-        float x = r0*cos(theta);
-        float y = r*sin(n);
-        float z = r*cos(n);
-        ofDrawSphere(x, y ,z, 1);
+        ofDrawSphere(randomSphere(referenceSphereRadius), 1);
     }
     ofSeedRandom();
 }
-
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
