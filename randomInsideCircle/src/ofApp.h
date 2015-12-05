@@ -11,8 +11,8 @@ class ofApp : public ofBaseApp{
 
     void drawAverageRandomCircle(ofVec2f center = ofVec2f(ofGetWidth()/2.0, ofGetHeight()/2.0), float referenceCircleRadius = 100, int randomPointNumber = 100, bool enableSeedRandom = false);
     void drawRandomCircle(ofVec2f center = ofVec2f(ofGetWidth()/2.0, ofGetHeight()/2.0), float referenceCircleRadius = 100, int randomPointNumber = 100, bool enableSeedRandom = false);
-    void drawRandomSphereSurface(ofVec3f center, float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom = false);
-    void drawRandomSphere(ofVec3f center, float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom = false);
+    void drawRandomSphereSurface(float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom = false);
+    void drawRandomSphere(float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom = false);
     
 		void keyPressed(int key);
 		void keyReleased(int key);

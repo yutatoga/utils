@@ -38,14 +38,14 @@ void ofApp::draw(){
     ofTranslate(ofGetWidth()/4.0*3-ofGetWidth()/4.0/2.0, ofGetHeight()/2.0-ofGetHeight()/2.0/2.0);
     ofDrawBitmapStringHighlight("drawRandomSphere", -60, ofGetWidth()/4.0/2.0);
     ofRotateY(ofGetFrameNum());
-    drawRandomSphere(ofVec3f(0, 0, 0), ofGetWidth()/4.0/2.0*0.8, 1000);
+    drawRandomSphere(ofGetWidth()/4.0/2.0*0.8, 1000);
     ofPopMatrix();
     
     ofPushMatrix();
     ofTranslate(ofGetWidth()/4.0*4-ofGetWidth()/4.0/2.0, ofGetHeight()/2.0-ofGetHeight()/2.0/2.0);
     ofDrawBitmapStringHighlight("drawRandomSphereSurface", -80, ofGetWidth()/4.0/2.0);
     ofRotateY(ofGetFrameNum());
-    drawRandomSphereSurface(ofVec3f(0, 0, 0), ofGetWidth()/4.0/2.0*0.8, 1000);
+    drawRandomSphereSurface(ofGetWidth()/4.0/2.0*0.8, 1000);
     ofPopMatrix();
     
     // draw as ofSeedRandom(seedRandom)
@@ -70,7 +70,7 @@ void ofApp::draw(){
     ofDrawBitmapStringHighlight("drawRandomSphere", -60, ofGetWidth()/4.0/2.0);
     ofRotateY(ofGetFrameNum());
     ofSeedRandom(seedRandom);
-    drawRandomSphere(ofVec3f(0, 0, 0), ofGetWidth()/4.0/2.0*0.8, 1000);
+    drawRandomSphere(ofGetWidth()/4.0/2.0*0.8, 1000);
     ofSeedRandom();
     ofPopMatrix();
     
@@ -79,7 +79,7 @@ void ofApp::draw(){
     ofDrawBitmapStringHighlight("drawRandomSphereSurface", -80, ofGetWidth()/4.0/2.0);
     ofRotateY(ofGetFrameNum());
     ofSeedRandom(seedRandom);
-    drawRandomSphereSurface(ofVec3f(0, 0, 0), ofGetWidth()/4.0/2.0*0.8, 1000);
+    drawRandomSphereSurface(ofGetWidth()/4.0/2.0*0.8, 1000);
     ofSeedRandom();
     ofPopMatrix();
 }
@@ -120,7 +120,7 @@ void ofApp::drawRandomCircle(ofVec2f center, float referenceCircleRadius, int ra
     ofSeedRandom();
 }
 
-void ofApp::drawRandomSphereSurface(ofVec3f center, float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom){
+void ofApp::drawRandomSphereSurface(float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom){
     if (enableSeedRandom) {
         ofSeedRandom(1);
     }
@@ -136,7 +136,7 @@ void ofApp::drawRandomSphereSurface(ofVec3f center, float referenceSphereRadius,
     ofSeedRandom();
 }
 
-void ofApp::drawRandomSphere(ofVec3f center, float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom){
+void ofApp::drawRandomSphere(float referenceSphereRadius, int randomPointNumber, bool enableSeedRandom){
     if (enableSeedRandom) {
         ofSeedRandom(1);
     }
